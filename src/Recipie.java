@@ -133,7 +133,19 @@ public class Recipie {
                     break;
                 case 5:
                     System.out.println("delete data");
-
+                    System.out.println("enter price:");
+                    price = s.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/recipedb","root","");
+                        String sql="DELETE FROM `recipe` WHERE `price`="+price;
+                        Statement stmt =con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("deleted successfully");
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
                 case 6:
                     System.out.println("exit");
