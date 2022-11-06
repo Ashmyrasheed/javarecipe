@@ -83,7 +83,28 @@ public class Recipie {
                     break;
                 case 3:
                     System.out.println("search data");
-
+                    System.out.println("enter price:");
+                    price=s.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/recipedb","root","");
+                        String sql="SELECT `id`, `name`, `category`, `taste`, `price` FROM `recipe` WHERE `price`="+price;
+                        Statement stmt = con.createStatement();
+                        ResultSet rs= stmt.executeQuery(sql);
+                        while(rs.next()){
+                            String getname=rs.getString("name");
+                            String getcategory=rs.getString("category");
+                            String gettaste=rs.getString("taste");
+                            String getprice=rs.getString("price");
+                            System.out.println("recipename="+getname);
+                            System.out.println("preparedby="+getcategory);
+                            System.out.println("ingredients="+gettaste);
+                            System.out.println("price="+getprice);
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
                 case 4:
                     System.out.println("Update the data");
