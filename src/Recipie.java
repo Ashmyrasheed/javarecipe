@@ -30,8 +30,29 @@ public class Recipie {
 
                 case 1:
                     System.out.println("insertdata");
-
+                    System.out.println("enter recipe name");
+                    name=s.next();
+                    System.out.println("enter category");
+                    category=s.next();
+                    System.out.println("enter taste");
+                    taste=s.next();
+                    System.out.println("enter price");
+                    price=s.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/recipedb","root","");
+                        String sql="INSERT INTO `recipe`(`name`, `category`, `taste`, `price`) VALUES (?,?,?,?)";
+                        PreparedStatement stmt = con.prepareStatement(sql);
+                        stmt.setString(1,name);
+                        stmt.setString(2,category);
+                        stmt.setString(3,taste);
+                        stmt.setInt(4,price);
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
+
 
 
 
